@@ -1,0 +1,71 @@
+{% set name = "rdma-core" %}
+{% set version = "13" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url: https://github.com/linux-rdma/{{ name }}/archive/v{{ version }}.tar.gz
+    sha256: e5230fd7cda610753ad1252b40a28b1e9cf836423a10d8c2525b081527760d97
+  - path: ./ib_user_cm.h
+  - path: ./ib_user_sa.h
+  - path: ./ib_user_verbs.h
+  - path: ./rdma_user_cm.h
+  - patches:
+    - ./redhat-kernel-init-ocrdma-is-tech-preview.patch
+    - ./redhat-kernel-init-libi40iw-no-longer-tech-preview.patch
+    - ./fix-udma_to_device_barrier-on-aarch64.patch
+    - ./0001-srp_daemon-srp_daemon.c-Don-t-rely-on-attribute-offs.patch
+    - ./0002-srp_daemon-srp_daemon.c-Eliminate-some-unneeded-code.patch
+    - ./0003-srp_daemon-Use-consistent-format-when-printing-LID.patch
+    - ./0001-Use-integer-as-getopt_long-returns-integer.patch
+    - ./0001-libibumad-clean-up-htonll-ntohnll-handling.patch
+    - ./0001-ibverbs-Report-raw-packet-caps-as-part-of-query-devi.patch
+    - ./0002-ibverbs-Allow-creation-and-modification-of-WQ-with-c.patch
+    - ./0003-ibverbs-Allow-creation-of-QP-with-cvlan-stripping-of.patch
+    - ./0004-ibverbs-Add-an-option-to-poll-cvlan-value-from-a-CQ.patch
+    - ./0005-mlx5-Add-read_cvlan-support.patch
+    - ./0006-ibverbs-Add-support-for-scatter-FCS-ability-in-WQ.patch
+    - ./defines.patch
+
+build:
+  skip: True  # [win or osx]
+  number: 22
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ cdt('libudev') }} 
+    - {{ cdt('libudev-devel') }} 
+    - make
+    - cmake
+    - pkg-config
+  host:
+    - sed
+    - libnl3
+  run:
+    - libnl3
+
+about:
+  home: https://github.com/linux-rdma/rdma-core
+  license: GPL-2.0-only
+  license_family: GPL
+  license_file: COPYING.GPL2
+  summary: 'RDMA Core Userspace Libraries and Daemons'
+  description: |
+    this is the userspace components for the Linux
+    Kernel's drivers/infiniband subsystem.
+    Specifically this contains the userspace
+    libraries for the following device nodes:
+    /dev/infiniband/uverbsX (libibverbs)
+    /dev/infiniband/rdma_cm (librdmacm)
+    /dev/infiniband/umadX (libibumad)
+  doc_url: https://github.com/linux-rdma/rdma-core
+  dev_url: https://github.com/linux-rdma/rdma-core
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam

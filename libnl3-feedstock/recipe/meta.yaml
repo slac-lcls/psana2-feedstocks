@@ -1,0 +1,55 @@
+{% set name = "libnl3" %}
+{% set version = "3.2.28" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: ./libnl-{{ version }}.tar.gz
+  sha256: cd608992c656e8f6e3ab6c1391b162a5a51c49336b9219f7f390e61fc5437c41
+  patches:
+    - ./0001-compare-v4-addr-rh1370503.patch
+    - ./0002-msg-peek-by-default-rh1396882.patch
+    - ./typedef.patch
+    - ./in6.patch
+    - ./bison.patch
+
+build:
+  skip: True  # [win or osx]
+  number: 25
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - pkg-config
+    - flex
+    - bison
+    - libtool
+    - autoconf
+    - automake
+
+about:
+  home: http://www.infradead.org/~tgr/libnl/
+  license: GPL-2.0-only
+  license_family: GPL
+  license_file: COPYING
+  summary: 'Netlink Protocol Library Suite (libnl)'
+  description: |
+    the libnl suite is a collection of libraries
+    providing APIs to netlink protocol based Linux
+    kernel interfaces. Netlink is a IPC mechanism
+    primarly between the kernel and user space
+    processes. It was designed to be a more flexible
+    successor to ioctl to provide mainly networking
+    related kernel configuration and monitoring
+    interfaces.
+  doc_url: http://www.infradead.org/~tgr/libnl/
+  dev_url: https://github.com/tgraf/libnl
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam

@@ -1,0 +1,42 @@
+{% set name = "lcls2-epix-hr-pcie" %}
+{% set version = "3.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: file:///sdf/group/lcls/ds/ana/sw/source_files/{{ name }}-{{ version }}.tar.gz
+  sha256: 581e3058c6dd52aed46df7628012a9c0fd6f533a2b34875fa1f8e2345f77c0fc
+
+build:
+  skip: True  # [win or osx]
+  noarch: python
+  number: 2
+  script:
+    - "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python
+
+about:
+  home: https://github.com/slaclab/lcls2-epix-hr-pcie
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: 'TODO'
+  description: |
+    TODO.
+  doc_url: https://github.com/slaclab/lcls2-epix-hr-pcie
+  dev_url: https://github.com/slaclab/lcls2-epix-hr-pcie
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+

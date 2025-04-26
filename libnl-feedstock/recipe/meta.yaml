@@ -1,0 +1,50 @@
+{% set name = "libnl" %}
+{% set version = "1.1.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pswww.slac.stanford.edu/swdoc/tutorials/libnl-{{ version }}.tar.gz
+  sha256: 4f80c21fe5bbcdde6e72b59b4f98306063a41421f909887c34e58d93e746d063
+  patches:
+    - libnl-1.0-pre8-more-build-output.patch
+    - libnl-1.1-doc-inlinesrc.patch
+
+build:
+  skip: True  # [win or osx]
+  number: 29
+
+requirements:
+  requirements:
+  build:
+    - make
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - sed
+
+about:
+  home: http://www.infradead.org/~tgr/libnl/
+  license: GPL-2.0-only
+  license_family: GPL
+  license_file: COPYING
+  summary: 'Netlink Protocol Library Suite (libnl)'
+  description: |
+    the libnl suite is a collection of libraries
+    providing APIs to netlink protocol based Linux
+    kernel interfaces. Netlink is a IPC mechanism
+    primarly between the kernel and user space
+    processes. It was designed to be a more flexible
+    successor to ioctl to provide mainly networking
+    related kernel configuration and monitoring
+    interfaces.
+  doc_url: http://www.infradead.org/~tgr/libnl/
+  dev_url: https://github.com/tgraf/libnl
+
+extra:
+  recipe-maintainers:
+    - lcls-ii
+    - chrisvam
+

@@ -1,0 +1,44 @@
+{% set name = "epix-hr-single-10k" %}
+{% set version = "v.1.3.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: 1.3.4
+
+source:
+  url:  ./{{ name }}-1.3.4.tar.gz
+  sha256: 9056f270451c4a2044833a35836e183789c170c83999d14b363121d3c0a4b9a1
+  patches:
+    - setup.patch
+
+build:
+  skip: True  # [win or osx]
+  noarch: python
+  number: 0
+  script:
+    - "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python
+
+about:
+  home: https://github.com/slaclab/epix-hr-single-10k
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: 'EpixHR single 10k software and firmware'
+  description: |
+    firmware for cameralink-gateway devices.
+  doc_url: https://github.com/slaclab/epix-hr-single-10k
+  dev_url: https://github.com/slaclab/epix-hr-single-10k
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+

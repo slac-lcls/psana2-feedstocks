@@ -1,0 +1,44 @@
+{% set name = "lcls2-udp-pcie-apps" %}
+{% set version = "2.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: file:///sdf/group/lcls/ds/ana/sw/conda_bld/valmar/spack-bld/source_files/{{ name }}-{{ version }}.tar.gz
+  sha256: 12e1f24902c40b95073a7afcef2197dcb37a403a7c129cd8b415d1c54e5d41a8
+  patches:
+    - setup.patch
+
+build:
+  skip: True  # [win or osx]
+  noarch: python
+  number: 0
+  script:
+    - "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python
+
+about:
+  home: https://github.com/slaclab/lcls2-udp-pcie-apps
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: 'epix-udp-pcie-apps software and firmware'
+  description: |
+    firmware for epix-udp-pcie-apps.
+  doc_url: https://github.com/slaclab/lcls2-udp-pcie-apps
+  dev_url: https://github.com/slaclab/lcls2-udp-pcie-apps
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+

@@ -1,0 +1,36 @@
+{% set name = "roentdek" %}
+{% set version = "0.0.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: ./hexanode-proxy-{{ version }}.tar.gz 
+  sha256: 8d88cf4edaddd6ff8befabd916a49e0ac884b2dccd318f6c36953647c30b0506
+
+build:
+  skip: True  # [win or osx]
+  number: 25
+
+about:
+  home: https://www.roentdek.com
+  summary: 'Software for Roentdek detector'
+  description: |
+    This is a binary distribution from Achim
+    Czasch <czasch@atom.uni-frankfurt.de>,
+    received through email with Mikhail and
+    Timur, for working with a detector
+    discussed here: http://www.roentdek.com/,
+    see the email-czachim.txt file in the
+    source distribution. We're only going to
+    take the static lib and header file and
+    put it in the conda release.
+  doc_url: https://www.roentdek.com 
+  dev_url: https://www.roentdek.com
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+

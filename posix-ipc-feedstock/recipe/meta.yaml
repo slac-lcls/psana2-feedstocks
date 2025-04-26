@@ -1,0 +1,45 @@
+{% set name = "posix_ipc" %}
+{% set version = "1.1.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://github.com/osvenskan/{{ name }}/archive/refs/tags/rel{{ version }}.tar.gz
+  sha256: 1e5ca5c0d24377b81acbd068a1ce03630a26598d4a394cf3709c9ad797dfdc1d
+
+build:
+  number: 0
+  skip: True  # [win]
+  script:
+    - "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - python
+    - setuptools
+    - cython
+  run:
+    - python
+
+about:
+  home: http://semanchuk.com/philip/posix_ipc/
+  license: BSD
+  license_file: LICENSE
+  summary: POSIX IPC for Python
+  description: |
+    The Python extension module posix_ipc gives Python access to POSIX
+    inter-process semaphores, shared memory and message queues on systems that
+    support the POSIX Realtime Extensions.
+  doc_url: http://semanchuk.com/philip/posix_ipc/
+  doc_source_url: https://github.com/osvenskan/posix_ipc/
+  dev_url: https://github.com/osvenskan/posix_ipc/
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam

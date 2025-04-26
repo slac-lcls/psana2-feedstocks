@@ -1,0 +1,31 @@
+diff --git a/setup.py b/setup.py
+index b7bd6f3..6262a2e 100644
+--- a/setup.py
++++ b/setup.py
+@@ -27,6 +27,9 @@ setup(
+         'cameralink_gateway.surf.protocols.i2c',
+         'cameralink_gateway.surf.protocols.batcher',
+         'cameralink_gateway.surf.protocols.clink',
++        'cameralink_gateway.surf.protocols.htsp',
++        'cameralink_gateway.surf.protocols.sugoi',
++        'cameralink_gateway.surf.protocols.coaxpress',
+         'cameralink_gateway.surf.xilinx',
+         'cameralink_gateway.surf.devices.microchip',
+         'cameralink_gateway.surf.devices.ti',
+@@ -39,7 +42,11 @@ setup(
+         'cameralink_gateway.surf.devices.cypress',
+         'cameralink_gateway.surf.devices.silabs',
+         'cameralink_gateway.surf.devices.intel',
++        'cameralink_gateway.surf.devices.maxim',
++        'cameralink_gateway.surf.devices.amphenol',
+         'cameralink_gateway.surf.axi',
++        'cameralink_gateway.surf.dsp',
++        'cameralink_gateway.surf.dsp.fixed',
+         'cameralink_gateway.l2si_core',
+         'cameralink_gateway.LclsTimingCore',
+         'cameralink_gateway.axipcie',
+@@ -57,4 +64,3 @@ setup(
+         'cameralink_gateway.l2si_core': 'firmware/submodules/l2si-core/python/l2si_core',
+     }
+ )
+-

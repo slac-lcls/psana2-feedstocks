@@ -1,0 +1,44 @@
+{% set name = "high-rate-encoder-dev" %}
+{% set version = "2.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url:  https://pswww.slac.stanford.edu/swdoc/tutorials/{{ name }}-{{ version }}.tar.gz
+  sha256: 7bd03d867e8b25ac7ab89573b17ff9152e975cd93e72624c737681202ac90712
+  patches:
+    - setup.patch
+
+build:
+  skip: True  # [win or osx]
+  noarch: python
+  number: 0
+  script:
+    - "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python
+
+about:
+  home: https://github.com/slaclab/high-rate-encoder-dev
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: 'High rate encoder firmware'
+  description: |
+    High rate encode firmware and software.
+  doc_url: https://github.com/slaclab/high-rate-encoder-dev
+  dev_url: https://github.com/slaclab/high-rate-encoder-dev
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+

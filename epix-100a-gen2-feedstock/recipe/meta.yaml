@@ -1,0 +1,42 @@
+{% set name = "epix-100a-gen2" %}
+{% set version = "1.0.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url:  https://pswww.slac.stanford.edu/swdoc/tutorials/{{ name }}-{{ version }}.tar.gz
+  sha256: 26e9ffd88c57eb95d2350b0bfab492834112c3f6b653ac9e081b806cc967f45d
+
+build:
+  skip: True  # [win or osx]
+  noarch: python
+  number: 8
+  script:
+    - "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python
+
+about:
+  home: https://github.com/slaclab/epix-100a-gen2.git
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: 'Epix software and firmware'
+  description: |
+    firmware and software for Epix devices.
+  doc_url: https://github.com/slaclab/epix-100a-gen2.git
+  dev_url: https://github.com/slaclab/epix-100a-gen2.git
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+

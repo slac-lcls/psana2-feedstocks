@@ -1,0 +1,38 @@
+{% set name = "xtcdata" %}
+{% set version = "4.1.6" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/slac-lcls/lcls2/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 1bf40253bed1a7a8e31d7fd9ea80940ac0a1eabc7f34ad0a7c3e2a7e790459fd
+
+build:
+  skip: True  # [win]
+  number: 1
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+
+about:
+  home: https://github.com/slac-lcls/lcls2
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.md
+  summary: 'LCLS-II DAQ and Software'
+  description: |
+    DAQ and analysis software for LCLS-II
+  doc_url: https://github.com/slac-lcls/lcls2 
+  dev_url: https://github.com/slac-lcls/lcls2
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+    - melchior

@@ -1,0 +1,44 @@
+{% set name = "lcls2_timetool" %}
+{% set version = "3.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url:  https://pswww.slac.stanford.edu/swdoc/tutorials/{{ name }}-{{ version }}.tar.gz
+  sha256: fa9fea8ea77ea2c68239db99e168c055c90174a78a894275fa458b9905fb371c
+  patches:
+    - pip.patch
+
+build:
+  skip: True  # [win or osx]
+  noarch: python
+  number: 25
+  script:
+    - "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python
+
+about:
+  home: https://github.com/slaclab/lcls2-timetool
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: 'LCLS-II timetool software and firmware'
+  description: |
+    firmware for LCLS-II timetool devices.
+  doc_url: https://github.com/slaclab/lcls2-timetool
+  dev_url: https://github.com/slaclab/lcls2-timetool
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+

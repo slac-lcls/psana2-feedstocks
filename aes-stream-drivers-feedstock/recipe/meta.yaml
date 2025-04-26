@@ -1,0 +1,33 @@
+{% set name = "aes-stream-drivers" %}
+#{% set version = "5.19.1" %}
+{% set version = "devel_20241013" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: file:///sdf/group/lcls/ds/ana/sw/source_files/aes-stream-drivers-add_write_en-20241013.zip
+  #url: https://github.com/slaclab/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  #sha256: 27bdd0c37a34a184c0a7eab9941091e3138a8b3d3d55ac3062c13b39f4c9a8fb
+  sha256: 51a1c81906fcc59c1fc88ab2c39e03efd2f8256232de3041561b7c8f6e194af3
+
+build:
+  skip: True  # [win or osx]
+  number: 5
+
+about:
+  home: https://jupp0r.github.io/prometheus-cpp
+  license: MIT
+  license_family: MIT
+  summary: 'Headers for streaming kernel drivers (PGP, AxiStream, ExoTem) '
+  description: |
+    Development headers for streaming kernel drivers
+  doc_url: https://github.com/slaclab/aes-stream-drivers
+  dev_url: https://github.com/slaclab/aes-stream-drivers
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+

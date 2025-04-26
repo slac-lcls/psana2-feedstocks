@@ -1,0 +1,61 @@
+{% set name = "rogue" %}
+{% set version = "v6.1.3" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: file:///sdf/group/lcls/ds/ana/sw/source_files/rogue-6.1.3.tar.gz
+  sha256: cddc55af0ff0d3c9047fab59d2bc72c72d0217ed31d928d1c5d54d790e96ba09 
+
+build:
+   number: 2
+
+requirements:
+   build:
+     - {{ compiler('c') }}
+     - {{ compiler('cxx') }}
+     - git
+     - cmake
+     - make
+   host:
+     - python=3.9
+     - boost
+     - bzip2
+     - zeromq
+     - numpy
+   run:
+     - python=3.9
+     - boost
+     - bzip2
+     - zeromq
+     - numpy
+     - ipython
+     - p4p
+     - pyyaml
+     - jsonpickle
+     - pyzmq
+     - parse
+     - click
+     - sqlalchemy
+     - pydm>=1.18.0
+     - pyserial
+     - matplotlib
+
+about:
+  home: https://github.com/slaclab/rogue
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: 'SLAC Python Based Hardware Abstraction & Data Acquisition System'
+  description: |
+    python-based hardware abstraction and data acquisition system
+    for SLAC.
+  doc_url: https://slaclab.github.io/rogue/
+  dev_url: https://github.com/slaclab/rogue
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
