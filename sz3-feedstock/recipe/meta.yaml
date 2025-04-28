@@ -1,0 +1,47 @@
+{% set name = "SZx" %}
+{% set version = "v1.1.1d" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/szcompressor/{{ name }}
+  git_tag: 3a0f875afb0de045517aad150caa6f3842e867b5
+
+build:
+  skip: True  # [win or osx]
+  number: 2
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+    - pkg-config
+  host:
+    - gsl
+    - zlib
+    - zstd
+  run:
+    - gsl
+    - zlib
+    - zstd
+
+about:
+  home: https://github.com/szcompressor/SZx
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: copyright-and-BSD-license.txt
+  summary: 'SZx: Lossy Compression Framework for Scientific Datasets'
+  description: |
+    SZx - Lossy Compression Framework for Scientific Datasets
+  doc_url: https://github.com/szcompressor/SZx
+  dev_url: https://github.com/szcompressor/SZx
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+
