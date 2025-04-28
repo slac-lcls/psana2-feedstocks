@@ -1,0 +1,39 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8f08865..43b642b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -32,9 +32,9 @@ target_include_directories(
+ target_compile_features(${PROJECT_NAME}
+     INTERFACE cxx_std_17
+   )
+-target_link_libraries(${PROJECT_NAME} INTERFACE pybind11::embed)
+-target_link_libraries(${PROJECT_NAME} INTERFACE pybind11::module)
+-target_link_libraries(${PROJECT_NAME} INTERFACE OpenMP::OpenMP_CXX)
++target_link_libraries(${PROJECT_NAME} INTERFACE pybind11::embed rt)
++target_link_libraries(${PROJECT_NAME} INTERFACE pybind11::module rt)
++target_link_libraries(${PROJECT_NAME} INTERFACE OpenMP::OpenMP_CXX rt)
+ 
+ option(QoZ_USE_BUNDLED_ZSTD "prefer the bundled version of Zstd" OFF)
+ option(QoZ_DEBUG_TIMINGS "print debug timing information" ON)
+@@ -48,17 +48,17 @@ endif()
+ pkg_search_module(ZSTD IMPORTED_TARGET libzstd)
+ if(ZSTD_FOUND AND NOT QoZ_USE_BUNDLED_ZSTD)
+   message("Zstd found.")
+-  target_link_libraries(${PROJECT_NAME} INTERFACE PkgConfig::ZSTD)
++  target_link_libraries(${PROJECT_NAME} INTERFACE PkgConfig::ZSTD rt)
+ else()
+   message("Zstd not found.")
+   add_subdirectory(zstd)
+-  target_link_libraries(${PROJECT_NAME} INTERFACE zstd)
++  target_link_libraries(${PROJECT_NAME} INTERFACE zstd rt)
+ endif()
+ 
+ find_package(GSL)
+ if (GSL_FOUND)
+   message("GSL found.")
+-  target_link_libraries(${PROJECT_NAME} INTERFACE GSL::gsl)
++  target_link_libraries(${PROJECT_NAME} INTERFACE GSL::gsl rt)
+   target_compile_definitions(${PROJECT_NAME} INTERFACE -DENABLE_GSL="TRUE")
+ else()
+   message("GSL not found.")
+

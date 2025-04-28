@@ -1,0 +1,52 @@
+{% set name = "QoZ" %}
+{% set version = "2022.06.04" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  #  git_url: https://github.com/robertu94/{{ name }}
+  git_url: https://github.com/szcompressor/{{ name }}
+  git_tag: 635f628fb838651ae3ec4d6978a4d91b1714c532
+  #patches: 
+  #  - ./rt.patch
+
+build:
+  skip: True  # [win or osx]
+  number: 5
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+    - pkg-config
+    - pybind11
+  host:
+    - gsl
+    - zstd
+    - qcat
+  run:
+    - gsl
+    - zstd
+    - qcat
+
+about:
+  home:  https://github.com/robertu94/QoZ
+  license: BSD-4-Clause
+  license_family: BSD
+  license_file: copyright-and-BSD-license.txt
+  summary: 'QoZ: Dynamic Quality Metric Oriented Error Bounded Lossy Compression for Scientific Datasets'
+  description: |
+    'This is the source code of QoZ: Dynamic Quality Metric Oriented Error 
+     Bounded Lossy Compression for Scientific Datasets'
+  doc_url: https://robertu94.github.io/libpressio
+  dev_url: https://github.com/robertu94/libpressio
+
+extra:
+  recipe-maintainers:
+    - melchior
+    - valmar
+    - chrisvam
