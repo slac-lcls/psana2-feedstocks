@@ -1,0 +1,45 @@
+{% set name = "sol2" %}
+{% set version = "v3.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/ThePhD/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: b82c5de030e18cb2bcbcefcd5f45afd526920c517a96413f0b59b4332d752a1e
+
+build:
+  skip: True  # [win or osx]
+  number: 3
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - make
+  host:
+    - lua
+  run:
+    - lua
+
+about:
+  home: https://github.com/ThePhD/sol2
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: 'sol2 is a C++ library binding to Lua'
+  description: |
+     sol2 is a C++ library binding to Lua. It currently supports
+     all Lua versions 5.1+ (LuaJIT 2.0+ and MoonJIT included). sol2
+     aims to be easy to use and easy to add to a project. The library
+     is header-only for easy integration with projects, and a single
+     header can be used for drag-and-drop start up.
+  doc_url: https://github.com/ThePhD/sol2
+  dev_url: https://github.com/ThePhD/sol2
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
