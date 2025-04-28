@@ -1,0 +1,81 @@
+{% set name = "psdaq" %}
+{% set version = "3.3.35" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/slac-lcls/lcls2/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 8636a1a6737505e9fb71ced1286cec4807991304ad959b8a174aa2164f39ad54
+
+build:
+  skip: True  # [win or osx]
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ cdt('libibverbs') }}
+    - {{ cdt('libibverbs-devel') }}
+    - {{ cdt('libnl') }}
+    - {{ cdt('librdmacm') }}
+    - {{ cdt('librdmacm-devel') }}
+    - make
+    - cmake
+  host:
+    - python
+    - setuptools
+    - pip
+    - xtcdata
+    - psalg
+    - python
+    - libfabric
+    - epics-base
+    - prometheus-cpp
+    - rapidjson
+    - readline
+    - zeromq
+    - p4p
+    - zlib
+  run:
+    - python
+    - xtcdata
+    - psalg
+    - python
+    - libfabric
+    - rapidjson
+    - readline
+    - transitions
+    - requests
+    - zeromq
+    - prometheus-cpp=0.9.0
+    - prometheus_client
+    - amityping
+    - mypy
+    - rogue=v5.9.3
+    - bluesky
+    - ophyd
+    - p4p
+    - lcls2_timetool
+    - epics-base
+    - zlib
+    - posix_ipc
+
+about:
+  home: https://github.com/slac-lcls/lcls2
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.md
+  summary: 'LCLS-II DAQ and Software'
+  description: |
+    DAQ and analysis software for LCLS-II
+  doc_url: https://github.com/slac-lcls/lcls2 
+  dev_url: https://github.com/slac-lcls/lcls2
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+
